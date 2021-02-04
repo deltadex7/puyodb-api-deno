@@ -1,0 +1,28 @@
+root=#mw-content-text
+
+base_link_search=/wiki/List_of_Characters
+// search from first h2 to empty p select all links
+
+img_link=/wiki/File:*.{jpg,png}
+img: .fullMedia>a[href]
+img_filename: .fullMedia>a
+
+using tbody>tr...
+  name: >th
+  img_src: >td>a[href]
+  _
+  name_unicode: >td[1]
+  name_latin: >td[1]
+  _
+  _
+  gender: >td[1]
+  birthday: >td[1]
+  blood_type: >td[1]
+  _
+  appear_first: >td[1]
+  appear_last: >td[1]
+  _
+end using
+
+description: >p[0]
+
