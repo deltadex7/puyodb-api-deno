@@ -1,18 +1,19 @@
+import { Application } from "https://deno.land/x/oak/mod.ts";
+import { router } from "./src/server/routes.ts";
 import { getAllCharacters } from "./src/scraper/extractor.ts";
+import { readCharacters, writeCharacters } from "./src/scraper/datamgr.ts";
 
-const fileName = "./characters.json";
-const charsFile = Deno.openSync(fileName, { write: true });
+// const chars = await getAllCharacters();
 
-const chars = await getAllCharacters();
-const time = new Date();
+// writeCharacters(chars);
+const env = Deno.env.toObject();
+const port = env.PORT && parseInt(env.PORT) || 8000;
+const hostname = env.HOST || "localhost";
 
-const result = {
-  lastUpdated: time.toISOString(),
-  chars,
-};
+const app = new Application();
 
-const encodedResult = new TextEncoder().encode(JSON.stringify(result));
-const bytesOut = charsFile.writeSync(encodedResult);
+app.use(router.routes());
 
-console.log(result);
-console.log(`${bytesOut} bytes written to ${fileName}`);
+console.log(`Server is running at ${hostname}:${port}`);
+
+await app.listen({ port, hostname });
