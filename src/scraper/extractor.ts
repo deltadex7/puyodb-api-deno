@@ -27,7 +27,7 @@ async function getDocumentModel(url: string): Promise<HTMLDocument> {
     console.debug(`Fetching site ${url}...`);
     const res = await fetch(url);
 
-    console.debug("Parsing site...");
+    console.debug(`Parsing site ${url}...`);
     const page = await res.text();
     const pageModel = new DOMParser().parseFromString(page, "text/html");
     if (pageModel) {
@@ -57,19 +57,19 @@ export async function getCharacter(wikiUrl: string): Promise<Character> {
 
     const tableData = pageModel.querySelector("table.infobox");
     if (tableData) {
-      console.debug("Extracting table data...");
-      console.debug(`${tableData.nextElementSibling?.textContent}`);
+      // console.debug("Extracting table data...");
+      // console.debug(`${tableData.nextElementSibling?.textContent}`);
       character.description = removeBrackets(
         tableData.nextElementSibling?.textContent ??
           "No description provided.",
       );
       tableData.getElementsByTagName("tr").forEach((tr, i) => {
         const tds = tr.children;
-        console.debug(
-          `${tds.length} | ${tds[0].textContent} | ${
-            tds.length >= 2 ? JSON.stringify(tds[1].textContent) : ""
-          }`,
-        );
+        // console.debug(
+        //   `${tds.length} | ${tds[0].textContent} | ${
+        //     tds.length >= 2 ? JSON.stringify(tds[1].textContent) : ""
+        //   }`,
+        // );
         if (i == 0) {
           character.name = tr.textContent;
           character.nameJP.latin = character.nameJP.unicode = character.name;
