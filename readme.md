@@ -4,12 +4,12 @@ This program fetches the data (wiki pages) from
 [Puyo Nexus Wiki](https://puyonexus.com/wiki/)
 
 Roadmap:
-- [v] Characters
+- [x] Characters
 - [ ] Puyo Puyo Tetris 2 Skill Battle skills
 - [ ] Puyo Puyo! Quest cards (?)
 
 Development roadmap:
-- [v] Functioning API
+- [x] Functioning API
 - [ ] Unit testing
 - [ ] API deployment
 
