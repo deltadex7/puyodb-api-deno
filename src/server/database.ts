@@ -21,7 +21,7 @@ class Database {
   /** Check every hour if the data is a day behind.
    * If it is, fetch and update the data.
    */
-  _checkInterval = setInterval(this.updateData, 3600000);
+  _checkInterval = setInterval(() => this.updateData(), 3600000);
 
   constructor() {
     this.loadData();
