@@ -10,7 +10,7 @@ import { parse } from "https://deno.land/std/flags/mod.ts";
 const env = Deno.env.toObject();
 const argPort = parse(Deno.args).port;
 const port = argPort ? Number(argPort) : 8000;
-const hostname = env.HOST || "localhost";
+const hostname = env.HOST || "0.0.0.0";
 
 const app = new Application();
 
