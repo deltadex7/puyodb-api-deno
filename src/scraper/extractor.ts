@@ -3,7 +3,14 @@ import {
   HTMLDocument,
 } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
 import { BASE_URL, WIKI_PREFIX } from "../consts.ts";
-import { Character } from "../data/character.ts";
+import { Character } from "../model/character.ts";
+import {
+  getNumbers,
+  removeBrackets,
+  stripBrackets,
+  tokenizeBrackets,
+  tokenizeBRs,
+} from "../utils.ts";
 
 // start point
 const startUrl = WIKI_PREFIX + "List_of_Characters";
@@ -52,9 +59,10 @@ export async function getCharacter(wikiUrl: string): Promise<Character> {
     if (tableData) {
       console.debug("Extracting table data...");
       console.debug(`${tableData.nextElementSibling?.textContent}`);
-      character.description = tableData.nextElementSibling?.textContent
-        .replaceAll(/\s*\(.*?\)\s*/g, " ").trim() ??
-        "No description provided.";
+      character.description = removeBrackets(
+        tableData.nextElementSibling?.textContent ??
+          "No description provided.",
+      );
       tableData.getElementsByTagName("tr").forEach((tr, i) => {
         const tds = tr.children;
         console.debug(
@@ -69,6 +77,7 @@ export async function getCharacter(wikiUrl: string): Promise<Character> {
         }
         const label = tds[0];
         const value = tds.length >= 2 && tds[1];
+        let numList: number[];
         if (!value) return;
         switch (label.textContent) {
           case "Kana":
@@ -81,21 +90,12 @@ export async function getCharacter(wikiUrl: string): Promise<Character> {
             // TODO: Find an alternative to textContent that reads newlines
             // Best alternative is innerText, but HTMLElement is not yet
             // implemented in deno-dom.
-            // character.alias = value.textContent
-            //   .replaceAll(/\s*\(.*?\)\s*/g, "\n")
-            //   .trim()
-            //   .split("\n");
-            console.debug(`${value.innerHTML}`);
-            character.alias = value.innerHTML
-              .trim()
-              .split("<br>").map((line) =>
-                line
-                  .replaceAll(/\s*\(.*?\)\s*/g, "")
-                  .replaceAll(/\s*<.*?>\s*/g, "")
-              );
+            character.alias = tokenizeBRs(value.innerHTML).map((line) =>
+              stripBrackets(line)
+            );
             break;
           case "Gender":
-            character.gender = value.textContent;
+            character.gender = tokenizeBrackets(value.textContent)[0];
             break;
           case "Birthday":
             character.birthday = value.textContent;
@@ -105,22 +105,16 @@ export async function getCharacter(wikiUrl: string): Promise<Character> {
             break;
           case "Age":
             character.age = Math.max(
-              ...value.textContent
-                .replaceAll(/\s*(\(.*?\))*\s*/g, "\n")
-                .trim()
-                .split("\n")
-                .map((v) => parseInt(v)),
+              ...getNumbers(value.textContent),
             );
             break;
           case "Height":
-            character.height = parseInt(
-              value.textContent.match(/\d+/g)?.shift() ?? "0",
-            ) || undefined;
+            numList = getNumbers(value.textContent);
+            character.height = (numList.length > 0) ? numList[0] : undefined;
             break;
           case "Weight":
-            character.weight = parseInt(
-              value.textContent.match(/\d+/g)?.shift() ?? "0",
-            ) || undefined;
+            numList = getNumbers(value.textContent);
+            character.height = (numList.length > 0) ? numList[0] : undefined;
             break;
           default:
             break;

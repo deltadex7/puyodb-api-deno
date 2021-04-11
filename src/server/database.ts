@@ -1,4 +1,4 @@
-import { Character } from "../data/character.ts";
+import { Character } from "../model/character.ts";
 import { readCharacters, writeCharacters } from "../scraper/datamgr.ts";
 import { getAllCharacters } from "../scraper/extractor.ts";
 
@@ -36,6 +36,7 @@ class Database {
 
   queryCharacter(query: string): UpdatedData<Character[]> {
     const _q = query.toLocaleLowerCase();
+    if (_q === "") return this._characters;
     return {
       lastUpdated: this._characters.lastUpdated,
       data: this._characters.data.filter(({ name, nameJP, id, alias }) =>

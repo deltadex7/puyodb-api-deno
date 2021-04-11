@@ -1,4 +1,4 @@
-import { Character } from "../data/character.ts";
+import { Character } from "../model/character.ts";
 import { FILE_CHARACTERS } from "../consts.ts";
 import { UpdatedData } from "../server/database.ts";
 

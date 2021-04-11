@@ -17,3 +17,4 @@ app.use(router.routes());
 console.log(`Server is running at ${hostname}:${port}`);
 
 await app.listen({ port, hostname });
+
