@@ -10,7 +10,8 @@ export function getCharacters(
 ) {
   response.status = 200;
   response.body = {
-    data: db.getCharacters(),
+    error: 0,
+    ...db.getCharacters(),
   };
 }
 
@@ -22,11 +23,12 @@ export function queryCharacter(
   if (!queryResults.data.length) {
     response.status = 400;
     response.body = {
+      error: 1,
       msg: `Cannot find character with query "${params.query}".`,
     };
     return;
   }
 
   response.status = 200;
-  response.body = { data: queryResults };
+  response.body = { error: 0, ...queryResults };
 }
