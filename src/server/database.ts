@@ -30,7 +30,7 @@ class Database {
 
   /** Load data from file */
   loadData() {
-    this.lockDatabase(() => {
+    this.lockDatabaseSync(() => {
       this._characters = readCharacters();
     });
   }
@@ -43,8 +43,13 @@ class Database {
   /** Check if the data is one day behind */
   isOutOfDate(): boolean {
     const now = new Date();
-    now.setUTCDate(now.getUTCDay() - 1);
-    return (now.valueOf() >= Date.parse(this._characters.lastUpdated));
+    now.setUTCDate(now.getUTCDate() - 1);
+    const last = Date.parse(this._characters.lastUpdated);
+    // console.debug(`
+    //   Now : ${now.valueOf()}
+    //   Last: ${last}
+    // `);
+    return (now.valueOf() >= last);
   }
 
   updateData() {
@@ -96,8 +101,8 @@ class Database {
   /** Fetch data from the web, serve in memory, and
    * save it to file.
    */
-  fetchData() {
-    this.lockDatabase(async () => {
+  async fetchData() {
+    await this.lockDatabase(async () => {
       this._characters.data = await getAllCharacters();
 
       const lastUpdated = new Date().toISOString();
@@ -110,7 +115,19 @@ class Database {
    * release the lock when finished
    * @param func Function that modifies the database
    */
-  lockDatabase(func: () => void) {
+  async lockDatabase(func: () => Promise<void>) {
+    console.log("Locking database...");
+    this._lockChars = true;
+    await func();
+    this._lockChars = false;
+    console.log("Database unlocked.");
+  }
+
+  /** Lock the database, modify the database, and
+   * release the lock when finished
+   * @param func Function that modifies the database
+   */
+  lockDatabaseSync(func: () => void) {
     console.log("Locking database...");
     this._lockChars = true;
     func();
