@@ -2,14 +2,12 @@ import { Application } from "https://deno.land/x/oak/mod.ts";
 import { router } from "./src/server/routes.ts";
 import { getAllCharacters } from "./src/scraper/extractor.ts";
 import { readCharacters, writeCharacters } from "./src/scraper/datamgr.ts";
-import { parse } from "https://deno.land/std/flags/mod.ts";
 
 // const chars = await getAllCharacters();
 
 // writeCharacters(chars);
 const env = Deno.env.toObject();
-const argPort = parse(Deno.args).port;
-const port = argPort ? Number(argPort) : 8000;
+const port = env.PORT ? Number(env.PORT) : 8000;
 const hostname = env.HOST || "0.0.0.0";
 
 const app = new Application();
