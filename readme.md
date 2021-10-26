@@ -4,18 +4,22 @@ This program fetches the data (wiki pages) from
 [Puyo Nexus Wiki](https://puyonexus.com/wiki/). It is
 unofficial and permission for further use is pending.
 
-The API can be accessed on this link:
-https://puyodb-api-deno.herokuapp.com/
+This API consists of two parts:
+- Data serving, which can be accessed on this link:
+  https://puyodb-api-deno.herokuapp.com/
+- Data scraping, which I maintain and will frequently update
+  through my local system, preferably daily.
 
 Roadmap:
 - [x] Characters
 - [ ] Puyo Puyo Tetris 2 Skill Battle skills
 - [ ] Puyo Puyo! Quest cards (?)
+- [ ] Attack power table
 
 Development roadmap:
 - [x] Functioning API
-- [ ] Unit testing
 - [x] API deployment
+- [ ] Unit testing
 
 ## Documentation
 
