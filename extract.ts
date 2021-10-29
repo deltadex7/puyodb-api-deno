@@ -6,13 +6,14 @@ const data = await getAllCharacters();
 
 if (data.length === 0) {
   console.error("ERROR: Character data is empty! Exiting with error.");
+  console.log("INFO: Existing data is not changed.");
   Deno.exit(1)
 }
 
 const old_data = readCharacters();
 
 if (equal(data, old_data.data)) {
-  console.error("INFO: Data is exactly the same. Exiting normally.");
+  console.log("INFO: Data is exactly the same. Exiting normally.");
   Deno.exit(0);
 } 
 
