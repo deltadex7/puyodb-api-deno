@@ -22,7 +22,8 @@ export function readCharacters(): UpdatedData<Character[]> {
 }
 
 export function writeCharacters(chars: UpdatedData<Character[]>) {
-  const charsData = JSON.stringify(chars);
+  // Pretty print with 2 spaces
+  const charsData = JSON.stringify(chars, null, 2);
   Deno.writeTextFileSync(FILE_CHARACTERS, charsData);
 
   console.log(
