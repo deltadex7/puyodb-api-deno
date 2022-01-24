@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2021-12-25T03:08:00.447Z",
+  "lastUpdated": "2022-01-24T01:46:01.762Z",
   "data": [
     {
       "id": "Ally",
@@ -80,7 +80,8 @@
         "카방클",
         "Karfunkel"
       ],
-      "description": "Carbuncle, also known as Car-kun, Kaa-kun , Carby or Carbunny, is the unusually happy mascot of the Puyo Puyo games. It used to be the pet of Satan until Madou Monogatari 2, but has since stuck around with Arle. It has a tendency to wander off in search of adventure, thus creating many wacky situations. In classic Puyo Puyo games, it can normally be found in a box somewhere on the frame surrounding the field. It also has the strange ability to fire a laser from its forehead."
+      "description": "Carbuncle, also known as Car-kun, Kaa-kun , Carby or Carbunny, is the unusually happy mascot of the Puyo Puyo games. It used to be the pet of Satan until Madou Monogatari 2, but has since stuck around with Arle. It has a tendency to wander off in search of adventure, thus creating many wacky situations. In classic Puyo Puyo games, it can normally be found in a box somewhere on the frame surrounding the field. It also has the strange ability to fire a laser from its forehead.",
+      "height": 25
     },
     {
       "id": "Doppelganger_Arle",
@@ -232,7 +233,8 @@
       ],
       "description": "Rulue is Arle's rival and is a powerful martial artist. She's madly in love with Satan, which means she'll pretty much do anything he says. Most of those orders involve hassling Arle, which Rulue has no problem with given that she's jealous of Arle's magical powers.  Her servant is a huge minotaur, despite having substantial amount of physical ability to defend herself.",
       "birthday": "February 24",
-      "age": 18
+      "age": 18,
+      "height": 52
     },
     {
       "id": "Satan",
@@ -253,7 +255,8 @@
         "Dunkler Prinz"
       ],
       "description": "Satan is often the main antagonist of the series. He's the former owner of Carbuncle and dotes on him frequently. He apparently has a liking to Hawaiian shirts. He is attracted to Arle Nadja and claims her to be his 'fiancée' and wants to be with her under the starry night sky. According to some Compile profiles, he planned to give Carbuncle to his fiance, as proof of his love. As Carbuncle is with Arle, he is constantly chasing after her.",
-      "age": 100
+      "age": 100,
+      "height": 76
     },
     {
       "id": "Masked_Satan",
