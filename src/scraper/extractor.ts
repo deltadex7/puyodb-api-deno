@@ -101,6 +101,7 @@ export async function getCharacter(wikiUrl: string): Promise<Character> {
             character.birthday = value.textContent;
             break;
           case "Blood Type":
+          case "Blood type":
             character.bloodType = value.textContent;
             break;
           case "Age":
@@ -114,7 +115,7 @@ export async function getCharacter(wikiUrl: string): Promise<Character> {
             break;
           case "Weight":
             numList = getNumbers(value.textContent);
-            character.height = (numList.length > 0) ? numList[0] : undefined;
+            character.weight = (numList.length > 0) ? numList[0] : undefined;
             break;
           default:
             break;
