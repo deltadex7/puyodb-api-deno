@@ -117,6 +117,19 @@ export async function getCharacter(wikiUrl: string): Promise<Character> {
             numList = getNumbers(value.textContent);
             character.weight = (numList.length > 0) ? numList[0] : undefined;
             break;
+          case "First Appearance":
+          case "First appearance":
+            character.firstAppear = tokenizeBRs(value.innerHTML).map((line) =>
+              removeBrackets(line)
+            ).join(', ');
+	    break;
+          case "Last Appearance":
+          case "Last appearance":
+          case "Latest Appearance":
+          case "Latest appearance":
+            character.lastAppear = tokenizeBRs(value.innerHTML).map((line) =>
+              removeBrackets(line)
+            ).join(', ');
           default:
             break;
         }

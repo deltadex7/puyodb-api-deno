@@ -15,4 +15,6 @@ export interface Character {
   age?: number;
   height?: number;
   weight?: number;
+  firstAppear?: string;
+  lastAppear?: string;
 }
