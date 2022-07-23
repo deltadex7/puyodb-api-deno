@@ -19,7 +19,7 @@ if (equal(data, old_data.data)) {
 
 const r = {
   lastUpdated: new Date().toISOString(),
-  data: await getAllCharacters(),
+  data,
 };
   
 writeCharacters(r);
